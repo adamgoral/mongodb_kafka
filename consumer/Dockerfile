@@ -1,0 +1,10 @@
+FROM python:3.9-slim
+
+WORKDIR /usr/src/app
+
+COPY ./consumer/requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY ./consumer .
+
+CMD ["faust", "-A", "app", "worker", "-l", "info"]
